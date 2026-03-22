@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>China Jul 2026 — 7-Day Itinerary</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #B5292A;
+    --gold: #C9922A;
+    --dark: #141010;
+    --cream: #FAF8F3;
+    --warm: #F3EDE0;
+    --muted: #7A6F62;
+    --border: rgba(0,0,0,0.08);
+    --green: #4A8060;
+    --blue: #2A5A8A;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--cream); color:var(--dark); font-family:'Outfit',sans-serif; font-weight:300; }
+
+  /* NAV */
+  .nav { position:sticky; top:0; z-index:100; background:var(--dark); display:flex; overflow-x:auto; scrollbar-width:none; }
+  .nav::-webkit-scrollbar { display:none; }
+  .nav-btn { flex-shrink:0; padding:13px 17px; font-family:'Outfit',sans-serif; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.4); background:none; border:none; cursor:pointer; border-bottom:2px solid transparent; transition:all .2s; white-space:nowrap; }
+  .nav-btn:hover, .nav-btn.active { color:white; border-bottom-color:var(--gold); }
+
+  /* HERO */
+  .hero { background:var(--dark); padding:52px 28px 44px; position:relative; overflow:hidden; }
+  .hero::after { content:'旅'; position:absolute; right:-20px; top:-10px; font-size:240px; color:rgba(255,255,255,0.025); font-family:'Cormorant Garamond',serif; pointer-events:none; }
+  .hero-label { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+  .hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(42px,8vw,76px); font-weight:700; color:white; line-height:.95; margin-bottom:8px; }
+  .hero h1 span { color:var(--gold); }
+  .hero-sub { color:rgba(255,255,255,0.38); font-size:13px; margin-bottom:28px; }
+  .hero-tags { display:flex; flex-wrap:wrap; gap:8px; }
+  .tag { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.11); border-radius:100px; padding:5px 14px; font-size:11px; color:rgba(255,255,255,0.55); }
+
+  /* ROUTE STRIP */
+  .route-strip { background:var(--red); padding:14px 28px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .rc { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:700; color:white; }
+  .ra { color:rgba(255,255,255,0.38); font-size:13px; }
+
+  /* PAGE */
+  .page { display:none; }
+  .page.active { display:block; }
+  .section { max-width:860px; margin:0 auto; padding:40px 24px 56px; }
+
+  /* DAY HEADER */
+  .day-header { display:flex; align-items:baseline; gap:16px; margin-bottom:10px; flex-wrap:wrap; }
+  .day-num { font-family:'Cormorant Garamond',serif; font-size:60px; font-weight:700; color:var(--red); line-height:1; }
+  .day-info { flex:1; min-width:160px; }
+  .day-date { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+  .day-title { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:600; line-height:1.2; }
+  .day-city-tag { background:var(--dark); color:white; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; padding:5px 14px; border-radius:100px; align-self:flex-start; white-space:nowrap; }
+
+  /* DAILY SPEND STRIP */
+  .spend-strip { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 28px; padding:12px 16px; background:var(--warm); border-radius:10px; border:1px solid var(--border); }
+  .spend-item { font-size:12px; color:var(--muted); }
+  .spend-item strong { color:var(--dark); font-weight:600; }
+  .spend-item.total { margin-left:auto; font-weight:600; color:var(--red); }
+
+  /* TIMELINE */
+  .timeline { border-left:2px solid rgba(181,41,42,0.15); margin-left:14px; padding-left:26px; }
+  .tl-item { position:relative; padding-bottom:26px; }
+  .tl-item:last-child { padding-bottom:0; }
+  .tl-item::before { content:''; position:absolute; left:-32px; top:5px; width:11px; height:11px; border-radius:50%; background:var(--cream); border:2px solid rgba(181,41,42,0.2); }
+  .tl-item.food::before { background:var(--gold); border-color:var(--gold); }
+  .tl-item.move::before { background:var(--red); border-color:var(--red); }
+  .tl-item.relax::before { background:var(--green); border-color:var(--green); }
+  .tl-item.act::before { background:var(--blue); border-color:var(--blue); }
+
+  .tl-time { font-size:11px; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); font-weight:500; margin-bottom:4px; }
+  .tl-title { font-size:15px; font-weight:500; color:var(--dark); margin-bottom:6px; }
+  .tl-desc { font-size:13px; color:#5C5248; line-height:1.72; }
+  .tl-desc b { color:var(--dark); font-weight:600; }
+
+  /* CHIPS */
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; align-items:center; justify-content:flex-start; }
+  .chip { flex:0 0 auto; display:inline-flex; align-items:center; font-size:11.5px; padding:4px 12px; border-radius:100px; font-weight:400; }
+  .chip.price { background:rgba(181,41,42,0.07); color:var(--red); border:1px solid rgba(181,41,42,0.15); }
+  .chip.free { background:rgba(74,128,96,0.07); color:var(--green); border:1px solid rgba(74,128,96,0.18); }
+  .chip.tip { background:rgba(201,146,42,0.08); color:#916A10; border:1px solid rgba(201,146,42,0.2); }
+  .chip.info { background:rgba(42,90,138,0.07); color:var(--blue); border:1px solid rgba(42,90,138,0.15); }
+  .chip.warn { background:rgba(180,90,0,0.07); color:#A05500; border:1px solid rgba(180,90,0,0.18); }
+
+  /* PERF BOX */
+  .perf-box { background:rgba(42,90,138,0.05); border:1px solid rgba(42,90,138,0.14); border-radius:9px; padding:13px 15px; margin-top:10px; }
+  .perf-box-title { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--blue); font-weight:600; margin-bottom:8px; }
+  .perf-row { display:flex; gap:12px; padding:6px 0; border-bottom:1px solid rgba(42,90,138,0.08); font-size:12.5px; }
+  .perf-row:last-child { border-bottom:none; padding-bottom:0; }
+  .perf-time { font-weight:600; color:var(--blue); min-width:100px; }
+  .perf-desc { color:var(--muted); }
+  .highlight-row { background:rgba(201,146,42,0.1); border-radius:6px; padding:6px 8px !important; margin:2px -8px; }
+
+  /* TICKET BOX */
+  .ticket-box { background:var(--dark); border-radius:10px; padding:16px 18px; margin-top:10px; }
+  .ticket-box-title { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:10px; }
+  .ticket-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.06); flex-wrap:wrap; gap:5px; }
+  .ticket-row:last-of-type { border-bottom:none; }
+  .ticket-name { font-size:13px; color:rgba(255,255,255,0.85); font-weight:400; }
+  .ticket-price { font-size:13px; color:var(--gold); font-weight:500; }
+  .ticket-note { font-size:11px; color:rgba(255,255,255,0.3); line-height:1.7; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.05); }
+
+  /* SECTION DIVIDER */
+  .section-div { height:1px; background:var(--border); margin:22px 0 22px; }
+
+  /* WARNING BOX */
+  .warn-box { background:rgba(181,41,42,0.04); border-left:3px solid var(--red); border-radius:0 8px 8px 0; padding:12px 14px; margin-top:10px; font-size:12.5px; color:var(--muted); line-height:1.7; }
+  .warn-box b { color:var(--dark); }
+
+  /* OVERVIEW */
+  .ov-grid { display:flex; flex-direction:column; gap:9px; }
+  .ov-card { display:grid; grid-template-columns:64px 1fr; gap:14px; align-items:center; background:white; border-radius:11px; padding:15px 18px; border:1px solid var(--border); cursor:pointer; transition:box-shadow .18s, transform .15s; }
+  .ov-card:hover { box-shadow:0 4px 18px rgba(0,0,0,0.08); transform:translateY(-1px); }
+  .ov-n { font-family:'Cormorant Garamond',serif; font-size:34px; font-weight:700; color:var(--red); line-height:1; }
+  .ov-n.dim { color:var(--muted); }
+  .ov-date { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:2px; }
+  .ov-txt { font-size:13.5px; font-weight:500; }
+  .ov-sub { font-size:11.5px; color:var(--muted); margin-top:2px; }
+
+  /* BUDGET */
+  .bgrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin-bottom:32px; }
+  .bcard { background:white; border-radius:10px; padding:14px 16px; border:1px solid var(--border); }
+  .bcard.tot { background:var(--red); }
+  .bcat { font-size:9.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+  .tot .bcat { color:rgba(255,255,255,0.55); }
+  .bamt { font-family:'Cormorant Garamond',serif; font-size:23px; font-weight:700; }
+  .tot .bamt { color:white; }
+  .bnote { font-size:11px; color:var(--muted); margin-top:2px; }
+  .tot .bnote { color:rgba(255,255,255,0.55); }
+
+  /* SECTION HEAD */
+  .sh { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--red); margin-bottom:22px; display:flex; align-items:center; gap:14px; }
+  .sh::after { content:''; flex:1; height:1px; background:rgba(181,41,42,0.14); }
+
+  /* FOOD + TIPS */
+  .food-dark { background:var(--dark); padding:40px 24px; }
+  .food-inner { max-width:860px; margin:0 auto; }
+  .food-dark .sh { color:var(--gold); }
+  .food-dark .sh::after { background:rgba(201,146,42,0.2); }
+  .food-cols { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
+  .food-col { border-left:2px solid var(--red); padding-left:16px; }
+  .food-col h4 { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:700; color:white; margin-bottom:10px; }
+  .fitem { font-size:12.5px; color:rgba(255,255,255,0.5); padding:4px 0; display:flex; gap:8px; line-height:1.5; }
+  .fdot { width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0; margin-top:6px; }
+
+  .tips-section { background:var(--warm); padding:40px 24px; }
+  .tips-inner { max-width:860px; margin:0 auto; }
+  .tips-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(195px,1fr)); gap:12px; }
+  .tip { background:white; border-radius:11px; padding:17px; border:1px solid var(--border); }
+  .tip-icon { font-size:21px; margin-bottom:8px; }
+  .tip strong { display:block; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--red); margin-bottom:5px; }
+  .tip p { font-size:12.5px; color:var(--muted); line-height:1.62; }
+
+  footer { background:var(--dark); color:rgba(255,255,255,0.22); text-align:center; padding:24px; font-size:11px; letter-spacing:1px; }
+  footer span { color:var(--gold); }
+
+  /* ── IMAGES ── */
+  .img-row { display:grid; gap:5px; margin-top:12px; border-radius:11px; overflow:hidden; border:1px solid var(--border); }
+  .img-row.cols-1 { grid-template-columns:1fr; }
+  .img-row.cols-2 { grid-template-columns:1fr 1fr; }
+  .img-row.cols-3 { grid-template-columns:1fr 1fr 1fr; }
+  .img-row img { width:100%; height:150px; object-fit:cover; display:block; transition:transform .35s; cursor:pointer; }
+  .img-row.tall img { height:200px; }
+  .img-row img:hover { transform:scale(1.04); }
+  @media(max-width:500px){ .img-row.cols-3 { grid-template-columns:1fr 1fr; } }
+
+  /* ── LINKS ── */
+  .link-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
+  .ext-link { display:inline-flex; align-items:center; gap:5px; font-size:12px; padding:5px 14px; border-radius:100px; text-decoration:none; transition:opacity .2s; font-weight:500; white-space:nowrap; }
+  .ext-link:hover { opacity:.7; }
+  .ext-link.map  { background:rgba(181,41,42,0.08); color:var(--red); border:1px solid rgba(181,41,42,0.2); }
+  .ext-link.book { background:rgba(201,146,42,0.09); color:#8A5F00; border:1px solid rgba(201,146,42,0.28); }
+  .ext-link.info { background:rgba(42,90,138,0.08); color:var(--blue); border:1px solid rgba(42,90,138,0.18); }
+
+  .hotel-card { background:#1e1a14; border:1.5px solid #8B6914; border-radius:10px; overflow:hidden; margin:18px 0 24px; box-shadow:0 4px 18px rgba(0,0,0,0.4); }
+  .hotel-body { padding:16px 18px; background:#1e1a14; }
+  .hotel-stars { color:#FFB800; font-size:13px; margin-bottom:4px; }
+  .hotel-name { font-size:16px; font-weight:700; color:#F5E6C0; margin-bottom:3px; letter-spacing:0.3px; }
+  .hotel-namezh { font-size:12px; color:#C8A96E; margin-bottom:10px; }
+  .hotel-meta { display:flex; gap:14px; font-size:12px; color:#D4B896; margin-bottom:6px; flex-wrap:wrap; }
+  .hotel-times { display:flex; gap:14px; font-size:11.5px; color:#B09870; margin-bottom:10px; flex-wrap:wrap; }
+  .hotel-highlights { margin:8px 0; padding-left:18px; }
+  .hotel-highlights li { font-size:13px; color:#E0D0B0; padding:3px 0; line-height:1.6; }
+  .hotel-links { display:flex; gap:8px; margin-top:10px; }
+  a { color:inherit; }
+
+  /* ── TRIP TIMELINE ── */
+  .trip-timeline { margin-bottom: 8px; }
+  .tt-row { display:flex; gap:16px; }
+  .tt-left { display:flex; flex-direction:column; align-items:center; flex-shrink:0; width:36px; }
+  .tt-dot { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; z-index:1; }
+  .tt-dot-flight { background:var(--dark); color:white; font-size:14px; }
+  .tt-dot-hotel { background:#8B6914; color:white; font-size:14px; }
+  .tt-dot-day { background:var(--red); color:white; font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:700; }
+  .tt-line { flex:1; width:2px; background:rgba(0,0,0,0.08); min-height:16px; }
+  .tt-content { padding:6px 0 20px; flex:1; }
+  .tt-label { font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:var(--gold); margin-bottom:3px; font-weight:500; }
+  .tt-main { font-size:14px; font-weight:500; color:var(--dark); line-height:1.45; }
+  .tt-meta { font-size:12px; color:var(--muted); margin-top:2px; }
+  .tt-hotel-links { display:flex; gap:6px; margin-top:8px; }
+  .tt-clickable { cursor:pointer; }
+  .tt-row.tt-day:hover .tt-main { color:var(--red); }
+  .tt-row.tt-hotel .tt-content { background:rgba(139,105,20,0.05); border:1px solid rgba(139,105,20,0.15); border-radius:10px; padding:12px 14px 12px; margin-bottom:4px; }
+  .tt-row.tt-flight .tt-content { background:rgba(20,16,16,0.04); border:1px solid rgba(0,0,0,0.08); border-radius:10px; padding:12px 14px 12px; margin-bottom:4px; }
+
+  @media(max-width:600px) {
+    .section { padding:28px 16px 48px; }
+    .tl-item::before { left:-24px; }
+    .timeline { margin-left:8px; padding-left:18px; }
+    .day-num { font-size:46px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav-wrapper">
+  <nav class="nav" id="mainNav">
+    <button class="nav-btn active" onclick="go('overview')">Overview</button>
+    <button class="nav-btn" onclick="go('day1')">Day 1</button>
+    <button class="nav-btn" onclick="go('day2')">Day 2</button>
+    <button class="nav-btn" onclick="go('day3')">Day 3</button>
+    <button class="nav-btn" onclick="go('day4')">Day 4</button>
+    <button class="nav-btn" onclick="go('day5')">Day 5</button>
+    <button class="nav-btn" onclick="go('day5b')">Day 6</button>
+    <button class="nav-btn" onclick="go('day6')">Day 7</button>
+
+
+    <button class="nav-btn" onclick="go('food')">🍜 Food Guide</button>
+    <button class="nav-btn" onclick="go('tips')">💡 Tips</button>
+  </nav>
+</div>
+<div class="day-dropdown-bar">
+  <span class="dropdown-label">Jump to</span>
+  <div class="day-select-wrap">
+  <select class="day-select" onchange="go(this.value); this.blur();">
+    <option value="overview">📋 Overview</option>
+    <option value="day1">Day 1 — Tue 14 Jul · Fly In · Arrive Guangzhou</option>
+    <option value="day2">Day 2 — Wed 15 Jul · Guangzhou Full Day</option>
+    <option value="day3">Day 3 — Thu 16 Jul · Foshan → Guilin</option>
+    <option value="day4">Day 4 — Fri 17 Jul · Li River → Yangshuo</option>
+    <option value="day5">Day 5 — Sat 18 Jul · Yangshuo Full Day</option>
+    <option value="day5b">Day 6 — Sun 19 Jul · Yangshuo → Shenzhen</option>
+    <option value="day6">Day 7 — Mon 20 Jul · Shenzhen Full Send · SQ857 02:20</option>
+    <option value="food">🍜 Food Guide</option>
+    <option value="tips">💡 Tips</option>
+  </select>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-label">6 Pax · Jul 14–21, 2026 · Hour-by-Hour Edition</div>
+  <h1>China<br><span>Jul '25</span></h1>
+  <div class="hero-sub">Guangzhou · Foshan · Guilin · Yangshuo · Shenzhen</div>
+  <div class="hero-tags">
+    <span class="tag">🍜 Food-first</span>
+    <span class="tag">🥋 Ip Man Foshan</span>
+    <span class="tag">🚢 Li River Cruise</span>
+    <span class="tag">🎋 Yulong Bamboo Raft</span>
+    <span class="tag">💆 Massage built-in</span>
+    <span class="tag">🚄 No internal flights</span>
+    <span class="tag">10am–11pm daily schedule</span>
+  </div>
+</div>
+
+<div class="route-strip">
+  <span class="rc">SIN</span><span class="ra">✈</span>
+  <span class="rc">Guangzhou</span><span class="ra">→</span>
+  <span class="rc">Foshan</span><span class="ra">🚄</span>
+  <span class="rc">Guilin</span><span class="ra">→</span>
+  <span class="rc">Yangshuo</span><span class="ra">🚄</span>
+  <span class="rc">Shenzhen</span><span class="ra">✈</span>
+  <span class="rc">SIN</span>
+</div>
+
+<!-- ===== OVERVIEW ===== -->
+<div id="overview" class="page active">
+  <div class="section">
+
+    <!-- BUDGET -->
+    <div class="sh">Budget per person</div>
+    <div class="bgrid">
+      <div class="bcard"><div class="bcat">✈ Flights SQ</div><div class="bamt">~S$650</div><div class="bnote">Book now — Jul peak</div></div>
+      <div class="bcard"><div class="bcat">🏨 Hotels 6 nights</div><div class="bamt">~S$340</div><div class="bnote">4 hotels, share rooms</div></div>
+      <div class="bcard"><div class="bcat">🚄 Transport</div><div class="bamt">~S$160</div><div class="bnote">Trains + DiDi</div></div>
+      <div class="bcard"><div class="bcat">🍜 Food 6 days</div><div class="bamt">~S$230</div><div class="bnote">~S$38/day average</div></div>
+      <div class="bcard"><div class="bcat">🎟 Activities</div><div class="bamt">~S$180</div><div class="bnote">Cruise, raft, spa, show</div></div>
+      <div class="bcard tot"><div class="bcat">Total / pax</div><div class="bamt">~S$1,560</div><div class="bnote">~S$9,360 for 6</div></div>
+    </div>
+
+    <!-- TRIP TIMELINE -->
+    <div class="sh" style="margin-top:32px">Trip Timeline</div>
+    <div class="trip-timeline">
+
+      <!-- FLY IN -->
+      <div class="tt-row tt-flight">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-flight">✈</div>
+          <div class="tt-line"></div>
+        </div>
+        <div class="tt-content">
+          <div class="tt-label">Tue 14 Jul · Fly In · N1</div>
+          <div class="tt-main">SQ850 · SIN T3 08:00 → GZ T2 12:10 · Check in Waifiden Yijiangyuan ~2:30pm</div>
+          <div class="tt-meta">Boeing 787 · ~4h 10min</div>
+        </div>
+      </div>
+
+      <!-- GUANGZHOU HOTEL BLOCK -->
+      <div class="tt-row tt-hotel">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-hotel">🏨</div>
+          <div class="tt-line"></div>
+        </div>
+        <div class="tt-content">
+          <div class="tt-label">N1–N2 · Guangzhou · 2 nights · checkout Thu 16 Jul morning</div>
+          <div class="tt-main">Waifiden Yijiangyuan Apt · Tianzi Wharf</div>
+          <div class="tt-meta">逸江苑外滩公寓 · 南堤二马路, Yuexiu · S$45–60/room/night</div>
+          <div class="tt-hotel-links">
+            <a href="https://www.trip.com/hotels/guangzhou-hotel-detail-926333/guangzhou-yijiangyuan-waifiden-apartment/" target="_blank" class="ext-link book">🏨 Book</a>
+            <a href="https://maps.google.com/maps/search/逸江苑外滩公寓+广州+南堤二马路38号" target="_blank" class="ext-link map">📍 Map</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 1 — Fly-in -->
+      <div class="tt-row tt-day" onclick="go('day1')">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-day">1</div>
+          <div class="tt-line"></div>
+        </div>
+        <div class="tt-content tt-clickable">
+          <div class="tt-label">Tue 14 Jul · Arrive Guangzhou · N1</div>
+          <div class="tt-main">Land 12:10pm · Tao Tao Ju dim sum · Shamian Island · Yongqingfang · Pearl River Night Cruise</div>
+        </div>
+      </div>
+
+      <!-- DAY 2 — GZ full day -->
+      <div class="tt-row tt-day" onclick="go('day2')">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-day">2</div>
+          <div class="tt-line"></div>
+        </div>
+        <div class="tt-content tt-clickable">
+          <div class="tt-label">Wed 15 Jul · Guangzhou Full Day · N2 · checkout tomorrow 9am</div>
+          <div class="tt-main">Guangzhou Restaurant breakfast · Xiguan old mansions · Foot massage · 🌸 Flower City Square · 🍺 Party Pier · 🌃 Canton Tower night</div>
+        </div>
+      </div>
+
+      <!-- GUILIN HOTEL BLOCK -->
+      <div class="tt-row tt-hotel">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-hotel">🏨</div>
+          <div class="tt-line"></div>
+        </div>
+        <div class="tt-content">
+          <div class="tt-label">N3 · Guilin · 1 night · checkout Fri 17 Jul 7:30am · free breakfast from 6:30am</div>
+          <div class="tt-main">Holiday Inn Express Guilin City Center (IHG)</div>
+          <div class="tt-meta">No. 30 Yiren Road · Steps from Zhengyang St &amp; noodle shops · Free breakfast from 6:30am ✅ · Tour desk in lobby</div>
+          <div class="tt-hotel-links">
+            <a href="https://www.trip.com/hotels/guilin-hotel-detail-29422206/holiday-inn-express-guilin-city-center/" target="_blank" class="ext-link book">🏨 Book HIX Guilin</a>
+            <a href="https://maps.google.com/maps/search/hotels+near+Zhengyang+Street+Guilin" target="_blank" class="ext-link map">📍 Map</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 3 — Foshan + Guilin -->
+      <div class="tt-row tt-day" onclick="go('day3')">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-day">3</div>
+          <div class="tt-line"></div>
+        </div>
+        <div class="tt-content tt-clickable">
+          <div class="tt-label">Thu 16 Jul · Foshan → Guilin · N3</div>
+          <div class="tt-main">Checkout 9am · Ancestral Temple · ⭐ Wing Chun 2:15pm · 🚄 Train ~5pm → Guilin ~8pm</div>
+        </div>
+      </div>
+
+      <!-- YANGSHUO HOTEL BLOCK -->
+      <div class="tt-row tt-hotel">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-hotel">🏨</div>
+          <div class="tt-line"></div>
+        </div>
+        <div class="tt-content">
+          <div class="tt-label">N4–N5 · Yangshuo · 2 nights · checkout Sun 19 Jul 11am</div>
+          <div class="tt-main">Yuyuan Resort Yangshuo</div>
+          <div class="tt-meta">Shili Gallery, Yulong River · ~20 min DiDi from West Street · S$120–160/room/night · Karst views, pool, huge lawn · Worth the distance ✅</div>
+          <div class="tt-hotel-links">
+            <a href="https://www.trip.com/hotels/yangshuo-hotel-detail-5897034/yangshuo-yuyuan-resort/" target="_blank" class="ext-link book">🏨 Book</a>
+            <a href="https://maps.google.com/maps/search/Yuyuan+Resort+Yangshuo" target="_blank" class="ext-link map">📍 Map</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 4 — Li River -->
+      <div class="tt-row tt-day" onclick="go('day4')">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-day">4</div>
+          <div class="tt-line"></div>
+        </div>
+        <div class="tt-content tt-clickable">
+          <div class="tt-label">Fri 17 Jul · Li River → Yangshuo ⭐⭐ · N4</div>
+          <div class="tt-main">Checkout Guilin 7:30am · Li River Cruise 9:35am · Check in Yuyuan ~3pm · Beer fish dinner</div>
+        </div>
+      </div>
+
+      <!-- DAY 5 — Yangshuo full day -->
+      <div class="tt-row tt-day" onclick="go('day5')">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-day">5</div>
+          <div class="tt-line"></div>
+        </div>
+        <div class="tt-content tt-clickable">
+          <div class="tt-label">Sat 18 Jul · Yangshuo Full Day · N5 · Last night</div>
+          <div class="tt-main">Yulong Bamboo Raft ⭐ · Village lunch · Massage (parents) · Scooters · Sunset pool · Night market</div>
+        </div>
+      </div>
+
+      <!-- SHENZHEN HOTEL BLOCK -->
+      <div class="tt-row tt-hotel">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-hotel">🏨</div>
+          <div class="tt-line"></div>
+        </div>
+        <div class="tt-content">
+          <div class="tt-label">N6 · Shenzhen · 1 night · checkout Tue 21 Jul (bags stored til midnight)</div>
+          <div class="tt-main">Grade Hotel Shenzhen Shekou Sea World</div>
+          <div class="tt-meta">深圳蛇口南海希尔顿酒店 · Sea World, Shekou · S$130–170/room/night</div>
+          <div class="tt-hotel-links">
+            <a href="https://www.trip.com/hotels/shenzhen-hotel-detail-70352199/icon-lab-hotel-shenzhen-sea-world/" target="_blank" class="ext-link book">🏨 Book</a>
+            <a href="https://maps.google.com/maps/search/Grade+Hotel+Shenzhen+Shekou+Sea+World" target="_blank" class="ext-link map">📍 Map</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 5 transit — Yangshuo → SZX -->
+      <div class="tt-row tt-day" onclick="go('day5b')">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-day">6</div>
+          <div class="tt-line"></div>
+        </div>
+        <div class="tt-content tt-clickable">
+          <div class="tt-label">Sun 19 Jul · Yangshuo → Shenzhen · N6</div>
+          <div class="tt-main">Checkout Yuyuan 11am · 🚄 Train ~1pm · Arrive SZX ~4pm · 🚢 Sea World Plaza evening stroll · Dinner</div>
+        </div>
+      </div>
+
+      <!-- DAY 6 — SZX full send -->
+      <div class="tt-row tt-day" onclick="go('day6')">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-day">7</div>
+          <div class="tt-line"></div>
+        </div>
+        <div class="tt-content tt-clickable">
+          <div class="tt-label">Mon 20 Jul · Shenzhen Full Day · bags stored · fly 02:20</div>
+          <div class="tt-main">🎨 Dafen Oil Painting Village · 💆 Heat Joy Spa · 🌊 OCT Harbour water show · 🦀 Final seafood splurge · SQ857</div>
+        </div>
+      </div>
+
+      <!-- FLY HOME -->
+      <div class="tt-row tt-flight">
+        <div class="tt-left">
+          <div class="tt-dot tt-dot-flight">✈</div>
+        </div>
+        <div class="tt-content">
+          <div class="tt-label">Tue 21 Jul · Fly Home</div>
+          <div class="tt-main">SQ857 · SZX T3 02:20 → SIN T2 06:30</div>
+          <div class="tt-meta">Boeing 737 MAX 8 · ~4h 10min</div>
+        </div>
+      </div>
+
+    </div><!-- end trip-timeline -->
+
+  </div>
+</div><!-- end overview page -->
+<div id="day1" class="page">
+  <div class="section">
+    <div class="day-header">
+      <div class="day-num">1</div>
+      <div class="day-info">
+        <div class="day-date">Tuesday 14 July 2026</div>
+        <div class="day-title">Singapore ✈️ Guangzhou</div>
+      </div>
+      <div class="day-city-tag">Guangzhou</div>
+    </div>
+    <div class="spend-strip">
+      <span class="spend-item">✈️ <strong>SQ850</strong> · SIN 08:00 → GZ 12:10 · Same timezone, no jet lag</span>
+      <span class="spend-item">🌡 <strong>33–36°C</strong> · Stay indoors 11am–5pm · Evenings are comfortable</span>
+      <span class="spend-item">🏨 <strong>Hotel:</strong> Waifiden Yijiangyuan Apt · Tianzi Wharf · N1</span>
+      <span class="spend-item total">~CNY 200/pax</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-time">5:30 AM — Rise &amp; Shine</div>
+        <div class="tl-title">⏰ Wake Up · Wash Up · Grab Cars by 5:50 AM</div>
+        <div class="tl-desc">Set two alarms. Wake up, wash face, brush teeth, get dressed — out the door in 20 min. Final bag check: passport, travel insurance printout, CNY + SGD cash, phone charger, VPN installed on phone. Pre-booked Grab cars arrive at 5:50am — show driver: <strong>Changi Airport Terminal 3</strong>. About 20–30 min drive.</div>
+        <div class="chips">
+          <span class="chip tip">Pre-book Grab the night before — use scheduled pickup option</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">6:00 AM — Changi T3</div>
+        <div class="tl-title">🛫 Check-In · Security · Gate B/C</div>
+        <div class="tl-desc">Grab drops you at Terminal 3 Departure Hall. SQ counter Row 1–3, Level 3. If web check-in done, go straight to bag drop. Clear immigration and head to Gate B/C — boarding at 7:30am. Exchange some SGD to CNY here if you haven't (~CNY 500 cash per pax as backup).</div>
+        <div class="chips">
+          <span class="chip tip">Web check-in opens 48hrs before — do it the night before</span>
+          <span class="chip price">~CNY 500/pax emergency cash · rest on WeChat Pay</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Changi+Airport+Terminal+3" target="_blank" class="ext-link map">📍 T3 Map</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">8:00 AM — Airborne</div>
+        <div class="tl-title">✈️ SQ850 · Singapore → Guangzhou · ~4h 10min</div>
+        <div class="tl-desc">You land at noon with the whole afternoon ahead. No jet lag — same timezone as Singapore. Eat onboard and rest a little; it's an early start.</div>
+        <div class="chips">
+          <span class="chip info">UTC+8 both ways · No time zone change</span>
+        </div>
+        <div class="link-row">
+          <a href="https://www.singaporeair.com/en_UK/sg/plan-travel/flight-search/?tripType=O&from=SIN&to=CAN" target="_blank" class="ext-link info">✈️ Book SQ850</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">12:10 PM — Land in Guangzhou</div>
+        <div class="tl-title">🛬 CAN Terminal 2 · Immigration · Taxi to Hotel</div>
+        <div class="tl-desc">Immigration usually takes 15–30 min at lunchtime. After collecting luggage, take 2 taxis from the rank outside Arrivals Level 1 — show the driver: <strong>广州越秀区南堤二马路38号逸江苑外滩公寓</strong>. About 35–45 min, CNY 80–110 per car.</div>
+        <div class="chips">
+          <span class="chip tip">Show driver: 广州越秀区南堤二马路38号逸江苑外滩公寓 · 100m from Tianzi Wharf</span>
+          <span class="chip price">2 taxis ~CNY 90 each · Metro CNY 9/pax if budget</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Guangzhou+Baiyun+Airport+Terminal+2" target="_blank" class="ext-link map">📍 CAN T2</a>
+          <a href="https://web.didiglobal.com/" target="_blank" class="ext-link info">📱 DiDi App</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">2:30 PM — Check In</div>
+        <div class="tl-title">🏨 Waifiden Yijiangyuan Apartment · 南堤二马路38号 · Freshen Up</div>
+        <div class="tl-desc">Taxi drops you at the apartment entrance — show driver: 广州越秀区南堤二马路38号逸江苑外滩公寓. Check-in opens 12pm (earlier than most hotels). If room isn't ready, drop bags at the bell desk and head out — the hotel is steps from Beijing Road. Quick freshen up, fill water bottles, and you're off.</div>
+        <div class="chips">
+          <span class="chip info">Leave bags at bell desk if room not ready · Head out straight away</span>
+        </div>
+      </div>
+
+      <div class="tl-item food">
+        <div class="tl-time">3:30 PM — Dim Sum</div>
+        <div class="tl-title">Tao Tao Ju 陶陶居 — Est. 1880 · Michelin Bib Gourmand</div>
+        <div class="tl-desc">A 7-min walk from the hotel. One of Guangzhou's oldest and most respected dim sum restaurants — locals have been coming here since 1880. Order har gow, siu mai, char siu bao, cheung fun, and egg tarts. All-day menu after the main service ends around 3pm.</div>
+        <div class="chips">
+          <span class="chip price">~CNY 50–80/pax</span>
+          <span class="chip info">168 Beijing Rd · 7F · Walk-in usually fine in the afternoon</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Tao+Tao+Ju+Guangzhou+dim+sum" target="_blank" class="ext-link map">📍 Map</a>
+          <a href="https://www.youtube.com/results?search_query=Tao+Tao+Ju+guangzhou+dim+sum" target="_blank" class="ext-link info">🎬 Vlog</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">5:30 PM — Shamian Island</div>
+        <div class="tl-title">沙面岛 · Colonial Waterfront · Easy Stroll</div>
+        <div class="tl-desc">DiDi from Tao Tao Ju / hotel area — about 15 min, CNY 15–20. Drop off at Shamian Island north entrance.<br><br>A quiet island of French and British colonial architecture from the 1900s — shaded banyan trees, riverside benches, European-style buildings. Flat and easy walking, great for parents. Loop the island in about 30 min, then grab a cold drink at a riverside café.</div>
+        <div class="chips">
+          <span class="chip free">Free entry · Flat walking · Good for parents</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Shamian+Island+Guangzhou" target="_blank" class="ext-link map">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="tl-item food">
+        <div class="tl-time">6:30 PM — Old Quarter</div>
+        <div class="tl-title">Yongqingfang 永庆坊 · Lantern Lanes · Street Food</div>
+        <div class="tl-desc">10-min walk from Shamian Island. A restored Qing-era neighbourhood of lantern-lit alleys and shophouses — this is what old Guangzhou looks like. Walk through, try fried fresh milk (炸鲜奶) from a street stall, and wander into Shangxiajiu pedestrian street next door for roast goose and clay pot rice shops.</div>
+        <div class="chips">
+          <span class="chip price">Snacks CNY 15–30/pax</span>
+          <span class="chip tip">Try the fried fresh milk — a Guangzhou-only specialty</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Yongqingfang+Guangzhou" target="_blank" class="ext-link map">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="tl-item act">
+        <div class="tl-time">8:00 PM — Pearl River</div>
+        <div class="tl-title">Pearl River Night Cruise 珠江夜游 · 60 Min on the Water</div>
+        <div class="tl-desc">Take a taxi to Tianzi Pier (天字码头), about 20 min from Yongqingfang. Cruises run every 30–60 min from 7pm — buy at pier or pre-book on Klook. <strong>Bring all 6 passports</strong> — required for boarding at Tianzi Pier. Sit on the top deck: the Canton Tower lights up in rotating colours, the full Guangzhou skyline on both sides. A perfect first night in China.</div>
+        <div class="chips">
+          <span class="chip price">CNY 70–120/pax</span>
+          <span class="chip tip">Sit on the top deck · Canton Tower side for best views</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Pearl+River+Night+Cruise+Tianzi+Pier+Guangzhou" target="_blank" class="ext-link map">📍 Tianzi Pier</a>
+          <a href="https://www.klook.com/en-SG/activity/11702-pearl-river-night-cruise-guangdong/" target="_blank" class="ext-link book">🎟️ Book on Klook</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">10:00 PM — Late Supper</div>
+        <div class="tl-title">Roast Goose or Congee Near the Hotel</div>
+        <div class="tl-desc">Walk back from Tianzi Pier to the apartment — literally 100m. Optional late bite if still hungry — roast goose from the stalls at Shangxiajiu (CNY 45–70) or congee from any 24hr noodle shop near Beijing Road. Early night: Day 2 starts at 10am.</div>
+        <div class="chips">
+          <span class="chip price">CNY 30–50/pax if hungry</span>
+        </div>
+      </div>
+
+    </div><!-- end timeline -->
+  </div><!-- section -->
+</div><!-- page -->
+
+
+<!-- ===== DAY 2 ===== -->
+<div id="day2" class="page">
+  <div class="section">
+    <div class="day-header">
+      <div class="day-num">2</div>
+      <div class="day-info">
+        <div class="day-date">Wednesday 15 July 2026</div>
+        <div class="day-title">Guangzhou Full Day</div>
+      </div>
+      <div class="day-city-tag">Guangzhou</div>
+    </div>
+    <div class="spend-strip">
+      <span class="spend-item">🌡 <strong>33–36°C</strong> · Hottest 11am–4pm · Massage slot at 3:30pm is perfectly timed</span>
+      <span class="spend-item">🥟 <strong>Breakfast:</strong> Guangzhou Restaurant 10am</span>
+      <span class="spend-item">🌃 <strong>Evening:</strong> Flower City Square → Party Pier dinner → Canton Tower</span>
+      <span class="spend-item">🏨 <strong>Hotel:</strong> Waifiden Yijiangyuan Apt (N2) · Checkout tomorrow 9am · Pack tonight</span>
+      <span class="spend-item total">~CNY 270/pax</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item rest">
+        <div class="tl-time">9:00 AM — Rise &amp; Shine</div>
+        <div class="tl-title">⏰ Wake Up · Wash Up · Out the Door by 10am</div>
+        <div class="tl-desc">Early-ish start — Gulong Gorge day. Wake up, shower, get dressed. No checkout today, bags stay in the room. Quick breakfast nearby before heading to GZ South Station.</div>
+        <div class="chips">
+          <span class="chip tip">No checkout · Bags stay in room · Be ready by 9:50am</span>
+        </div>
+      </div>
+
+      <div class="tl-item eat">
+        <div class="tl-time">9:15 AM — Quick Breakfast</div>
+        <div class="tl-title">☕ Grab Breakfast Near Hotel · No Time to Sit Down</div>
+        <div class="tl-desc">Walk out of Waifiden and grab a quick bite along Beijing Road or Nandi Road — congee, rice noodles, or a baozi stall. Keep it under 20 min. You're heading to GZ South Station right after.</div>
+        <div class="chips">
+          <span class="chip tip">Keep it quick · Under 20 min · Baozi / congee / noodles</span>
+          <span class="chip price">~CNY 15–25/pax</span>
+        </div>
+      </div>
+
+      <div class="tl-item transit">
+        <div class="tl-time">10:00 AM — Head to GZ South Station</div>
+        <div class="tl-title">🚕 DiDi to 广州南站 · Guangzhou South Station</div>
+        <div class="tl-desc">DiDi from hotel to GZ South Station — CNY 40–55, about 35–40 min. Show driver: <strong>广州南站</strong>. Book the DiDi at 9:50am so it's waiting. At the station, buy 2 tickets to <strong>清远北 Qingyuan North</strong> at the counter or machine — train is ~24 min, runs frequently.</div>
+        <div class="chips">
+          <span class="chip transit">🚕 DiDi · CNY 40–55 · 35–40 min</span>
+          <span class="chip tip">Show driver: 广州南站</span>
+          <span class="chip tip">Buy train tickets: 广州南 → 清远北 at counter/machine</span>
+        </div>
+      </div>
+
+      <div class="tl-item transit">
+        <div class="tl-time">10:50 AM — Train to Qingyuan</div>
+        <div class="tl-title">🚄 广州南 → 清远北 · 24 Min · High Speed</div>
+        <div class="tl-desc">Board the high-speed train at GZ South — ~24 min ride to Qingyuan North. Trains run frequently so no need to pre-book, just buy on arrival. At Qingyuan North station, take 2 taxis (show: <strong>古龙峡景区</strong>) — about 45 min through mountain roads into the gorge. CNY 80–100 per taxi.</div>
+        <div class="chips">
+          <span class="chip transit">🚄 CNY 25–35/pax · 24 min</span>
+          <span class="chip transit">🚕 2 taxis from Qingyuan North · CNY 50–70/car · 30–45 min</span>
+          <span class="chip tip">Show taxi driver: 古龙峡景区</span>
+        </div>
+      </div>
+
+      <div class="tl-item activity">
+        <div class="tl-time">12:00 PM → 3:30 PM — ⭐ GULONG GORGE</div>
+        <div class="tl-title">🏞️ 古龙峡 · Glass Bridge · Kart Racing · Waterfall Walk</div>
+        <div class="tl-desc">One of Guangdong's most dramatic day trips — a deep mountain gorge with a 1,314m glass suspension bridge (Yuntian Bridge), go-kart track, and a waterfall trail. Buy tickets at the gate — prices vary by package: glass bridge + canyon combo typically CNY 98–128/pax. Check current prices at the ticket counter on arrival. Suggested split: glass bridge first (everyone), then kart racing (whoever wants), then waterfall walk (younger ones — steep sections). <strong>Parents can rest at the food court area</strong> near the entrance while the younger group does the waterfall section — plenty of seating, drinks, and snacks available. Roughly 3–3.5 hrs inside. Leave by 3:30pm sharp to make it back for the evening.</div>
+        <div class="chips">
+          <span class="chip price">Glass Bridge ~CNY 108/pax · Kart extra</span>
+          <span class="chip warn">⚠️ Leave by 3:30 PM — evening starts 6:30pm</span>
+          <span class="chip tip">Parents rest at food court · No need to do waterfall section</span>
+          <span class="chip tip">Opening hours 9am–4pm · Buy at gate</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/古龙峡+清远+广东" target="_blank" class="ext-link map">📍 Map · 古龙峡景区</a>
+        </div>
+      </div>
+
+      <div class="tl-item transit">
+        <div class="tl-time">3:30 PM — Return to Guangzhou</div>
+        <div class="tl-title">🚕 Taxis Back to Qingyuan · Train Home</div>
+        <div class="tl-desc">Taxis back to Qingyuan North Station — same CNY 50–70/car, ~30–45 min. Train back to GZ South (~24 min), then DiDi from GZ South to hotel (~35–40 min, CNY 40–55). Should be back at Waifiden by 5:30pm — about an hour to rest and freshen up before heading out for the evening.</div>
+        <div class="chips">
+          <span class="chip transit">🚕 Taxi → 🚄 Train → 🚕 DiDi · ~2 hrs total</span>
+          <span class="chip tip">Back at hotel ~5:30pm · 1 hr rest before evening</span>
+        </div>
+      </div>
+
+      <div class="tl-item rest">
+        <div class="tl-time">5:30 PM — Rest at Hotel</div>
+        <div class="tl-title">🏨 Back to Waifiden · Freshen Up Before the Evening</div>
+        <div class="tl-desc">Already back at the hotel — shower, change, and rest before the Zhujiang New Town evening. Leave for Flower City Square at 6:15pm. DiDi from Waifiden to Flower City Square is CNY 25–35, about 25 min.</div>
+        <div class="chips">
+          <span class="chip tip">Shower · Change · Leave hotel at 6:15pm</span>
+          <span class="chip transit">🚕 DiDi to Flower City Square · CNY 25–35 · 25 min</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">6:30 PM — Flower City Square</div>
+        <div class="tl-title">花城广场 · Quick Stroll · Canton Tower Golden Hour · Free</div>
+        <div class="tl-desc">DiDi from Waifiden hotel to Flower City Square — CNY 25–35, about 25 min. Quick 20-min stroll through the plaza: Canton Tower glowing to the south, Zaha Hadid Opera House as backdrop. Walk to the south end for the best tower shot, especially at golden hour just before the LEDs hit full intensity.</div>
+        <div class="chips">
+          <span class="chip free">Free · 20-min stroll · Best tower photo at golden hour</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Huacheng+Square+Guangzhou" target="_blank" class="ext-link map">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="tl-item food">
+        <div class="tl-time">7:00 PM — Party Pier</div>
+        <div class="tl-title">🍺 琶醍 Party Pier · Riverside Dinner · Canton Tower Across the Water</div>
+        <div class="tl-desc">A 10-min walk south along the Pearl River from the square. The old Zhujiang Brewery turned into GZ's best riverside bar and restaurant strip. The Canton Tower is directly across the water, lit up in full view while you eat. Grab a cold local Zhujiang beer (CNY 15–20), sit on the riverside boardwalk, and eat at one of the open restaurants. JoJo's Riverside has a rooftop bar with the best eye-level tower view in the city.</div>
+        <div class="chips">
+          <span class="chip price">Dinner ~CNY 60–100/pax · Local beer CNY 15</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Party+Pier+Guangzhou+琶醍" target="_blank" class="ext-link map">📍 Map</a>
+          <a href="https://jojosriverside.com" target="_blank" class="ext-link info">🍻 JoJo's Riverside</a>
+        </div>
+      </div>
+
+      <div class="tl-item act">
+        <div class="tl-time">7:45 PM — Canton Tower</div>
+        <div class="tl-title">广州塔 · 600m · 330,000 LEDs · Best After Dark</div>
+        <div class="tl-desc">5-min walk from Party Pier along the Pearl River promenade. The Canton Tower is best at night — 330,000 LEDs across the full 600m height, light show from 7pm. Go up (CNY 150/pax, 433m indoor deck) for a panoramic night view of the city. Or add the Bubble Tram — 16 glass pods that orbit horizontally around the outside of the tower at 460m, the world's highest Ferris wheel (CNY 198). If you'd rather save the money, watching from Haixinsha Bridge below is free and equally photogenic.</div>
+        <div class="chips">
+          <span class="chip price">CNY 150 to go up · Bubble Tram CNY 198 · Free from below</span>
+          <span class="chip tip">Haizhu Tram CNY 2 · glass-sided, runs along Pearl River</span>
+        </div>
+        <div class="link-row">
+          <a href="https://www.trip.com/travel-guide/attraction/guangzhou/canton-tower-90706/" target="_blank" class="ext-link info">🎟️ Tickets</a>
+          <a href="https://maps.google.com/maps/search/Haixinsha+Bridge+Guangzhou" target="_blank" class="ext-link map">📍 Free viewpoint</a>
+        </div>
+      </div>
+
+      <div class="tl-item move">
+        <div class="tl-time">9:30 PM — Back to Hotel</div>
+        <div class="tl-title">DiDi to Waifiden Apt · ~20 Min</div>
+        <div class="tl-desc">DiDi from Canton Tower back to the hotel — CNY 25–35, about 20 min.</div>
+        <div class="chips">
+          <span class="chip info">DiDi CNY 25–35 · ~20 min</span>
+        </div>
+      </div>
+
+      <div class="tl-item relax">
+        <div class="tl-time">10:00 PM — Pack for Tomorrow</div>
+        <div class="tl-title">Full Bags Tonight · Checkout 9am · Foshan</div>
+        <div class="tl-desc">Already at the hotel. Pack everything completely tonight — checkout is 9am sharp and you head straight to Foshan. Charge all devices, download train tickets offline on Trip.com.</div>
+        <div class="chips">
+          <span class="chip warn">Checkout 9am sharp · Everything packed tonight</span>
+        </div>
+      </div>
+
+    </div><!-- end timeline -->
+  </div><!-- section -->
+</div><!-- page -->
+
+
+<!-- ===== DAY 3 ===== -->
+<div id="day3" class="page">
+  <div class="section">
+    <div class="day-header">
+      <div class="day-num">3</div>
+      <div class="day-info">
+        <div class="day-date">Thursday 16 July 2026</div>
+        <div class="day-title">Foshan Morning → Train to Guilin</div>
+      </div>
+      <div class="day-city-tag">Foshan → Guilin</div>
+    </div>
+    <div class="spend-strip">
+      <span class="spend-item">🏮 <strong>Foshan:</strong> Ancestral Temple + Wing Chun show 2:15pm</span>
+      <span class="spend-item">🚄 <strong>Train ~5pm:</strong> Foshan West → Guilin North (~3 hrs)</span>
+      <span class="spend-item">🏨 <strong>Tonight:</strong> Holiday Inn Express Guilin · Free breakfast 6:30am · Early night</span>
+      <span class="spend-item total">~CNY 250/pax</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item rest">
+        <div class="tl-time">8:00 AM — Rise &amp; Shine · Pack Up</div>
+        <div class="tl-title">⏰ Wake Up · Shower · Finish Packing · Checkout at 9am</div>
+        <div class="tl-desc">Early start — checkout is at 9am sharp. Wake up, shower, and spend this hour doing a final sweep: chargers behind the TV, toiletries in the bathroom, anything stuffed under the bed. Zip up all bags and leave them by the door. No breakfast at the hotel — you'll eat in Foshan after checkout.</div>
+        <div class="chips">
+          <span class="chip warn">⚠️ Checkout 9:00 AM — all bags packed and by the door</span>
+          <span class="chip tip">Final sweep: chargers · bathroom · under the bed</span>
+        </div>
+      </div>
+      <div class="tl-item move">
+        <div class="tl-time">9:00 AM — Check Out + Head to Foshan</div>
+        <div class="tl-title">Check Out Waifiden · Metro to Foshan Zumiao</div>
+        <div class="tl-desc">Check out and take Metro Line 1 from Gongyuanqian → Xilang, then switch to the Guangfo Metro → Zumiao Station. About 50 min, CNY 12/pax. Or grab a DiDi directly (~CNY 60 for 2 cars, 45 min). Have breakfast at the hotel or grab something at the station.</div>
+        <div class="chips">
+          <span class="chip price">Metro CNY 12/pax · DiDi ~CNY 60 for 2 cars</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Foshan+Zumiao+Station" target="_blank" class="ext-link map">📍 Zumiao Station</a>
+        </div>
+      </div>
+
+      <div class="tl-item food">
+        <div class="tl-time">10:30 AM — Shunde Breakfast</div>
+        <div class="tl-title">双皮奶 Double-Skin Milk · Ginger Milk Curd · Peanut Milk</div>
+        <div class="tl-desc">Walk out of Zumiao Station — breakfast shops are within 2–3 min on foot. Small shops around Zumiao station serve Foshan's famous breakfast specialties. Double-skin milk (双皮奶) is the must-try — a silky steamed milk pudding, served warm or chilled, that originated here in Shunde. Also order ginger milk curd (姜撞奶) if available. This is their birthplace; nothing you've had in Singapore compares.</div>
+        <div class="chips">
+          <span class="chip price">~CNY 20–35/pax</span>
+          <span class="chip tip">Double-skin milk originated in Shunde · This is as good as it gets</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/double+skin+milk+Foshan+Zumiao" target="_blank" class="ext-link map">📍 Near Zumiao</a>
+        </div>
+      </div>
+
+      <div class="tl-item act">
+        <div class="tl-time">11:00 AM — Ancestral Temple</div>
+        <div class="tl-title">佛山祖庙 Foshan Ancestral Temple · Birthplace of Wing Chun</div>
+        <div class="tl-desc">5-min walk from Zumiao Station — the breakfast shops and the temple are right next to each other. One of the most important Taoist temples in southern China, dating to 960 AD — and the birthplace of Wing Chun kung fu, made famous by Ip Man (Bruce Lee's teacher). There's a dedicated Wing Chun hall and Ip Man memorial inside. <strong>The live Wing Chun and Lion Dance performance is at 2:15pm daily</strong> in the courtyard — plan the whole morning around being back for this. It's 20 min and genuinely impressive.</div>
+        <div class="chips">
+          <span class="chip price">CNY 20 entry · No passport needed</span>
+          <span class="chip tip">⭐ Wing Chun + Lion Dance: 2:15pm daily · arrive 10 min early</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Foshan+Ancestral+Temple+Zumiao" target="_blank" class="ext-link map">📍 Map</a>
+          <a href="https://www.youtube.com/results?search_query=Foshan+Ancestral+Temple+lion+dance+wing+chun" target="_blank" class="ext-link info">🎬 Vlog</a>
+        </div>
+      </div>
+
+      <div class="tl-item food">
+        <div class="tl-time">12:30 PM — Shunde Lunch</div>
+        <div class="tl-title">顺德菜 Shunde Cuisine · Near the Temple</div>
+        <div class="tl-desc">Walk from the temple — restaurants are within 5 min on foot. Shunde is considered the culinary capital of Guangdong — people come from Hong Kong just to eat here. Find a local restaurant within 5 min of Zumiao and order steamed fresh fish, scrambled egg with fresh milk, and pork belly. No beef needed — Cantonese cuisine naturally centres on pork and fish.</div>
+        <div class="chips">
+          <span class="chip price">~CNY 50–80/pax</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Shunde+cuisine+restaurant+Foshan+Zumiao" target="_blank" class="ext-link map">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="tl-item act">
+        <div class="tl-time">2:15 PM — ⭐ Wing Chun Show</div>
+        <div class="tl-title">Live Wing Chun + Lion Dance · Temple Courtyard · 20 Min</div>
+        <div class="tl-desc">Still inside the temple — walk back to the main courtyard after lunch. The temple's resident martial arts troupe performs daily at 2:15pm — authentic Wing Chun demonstrations and lion dance in the main courtyard. Position yourselves near the front about 10 minutes before it starts. This is one of the most authentic cultural experiences of the entire trip.</div>
+        <div class="chips">
+          <span class="chip info">~20 min · Included with entry · Arrive 10 min early · ⚠️ Cancelled on rainy days</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">2:45 PM — Final Foshan Snacks</div>
+        <div class="tl-title">Last Street Snacks Near Zumiao · Leave by 3:30pm</div>
+        <div class="tl-desc">45 minutes before heading to the station. Walk the lanes around Zumiao for one last double-skin milk or a small souvenir from the craft stalls. Don't stretch this past 3:30pm.</div>
+        <div class="chips">
+          <span class="chip warn">Leave by 3:30pm — station takes 30–40 min from here</span>
+        </div>
+      </div>
+
+      <div class="tl-item move">
+        <div class="tl-time">3:30 PM — To Foshan West Station</div>
+        <div class="tl-title">Metro or DiDi to 佛山西站 · ~5pm Train to Guilin</div>
+        <div class="tl-desc">Take metro or DiDi to Foshan West Station (佛山西站). Allow 30 min travel plus 30 min for security at the station. Target a 5:00–5:30pm departure — book on Trip.com, CNY 141/pax. Select 6 seats together (2 rows of 3 in the same carriage). Train takes about 3 hours, arriving Guilin North around 8pm.</div>
+        <div class="chips">
+          <span class="chip price">CNY 141/pax · Book on Trip.com 30 days before travel</span>
+          <span class="chip warn">⚠️ Book ~5pm train — show ends 2:35pm, station 40 min away</span>
+        </div>
+        <div class="link-row">
+          <a href="https://www.trip.com/trains/" target="_blank" class="ext-link info">🚄 Book on Trip.com</a>
+          <a href="https://maps.google.com/maps/search/Foshan+West+Station" target="_blank" class="ext-link map">📍 Foshan West Station</a>
+        </div>
+      </div>
+
+      <div class="tl-item move">
+        <div class="tl-time">~8:00 PM — Arrive Guilin</div>
+        <div class="tl-title">🚄 Guilin North Station · DiDi to Hotel · Check In</div>
+        <div class="tl-desc">Arrive Guilin North around 8–8:30pm. Take DiDi to Holiday Inn Express Guilin City Center (~20–30 min, CNY 25–35). Check in, freshen up. Guilin is just a one-night base — the Li River cruise departs at 9:35am tomorrow, so keep tonight simple.</div>
+        <div class="chips">
+          <span class="chip warn">Early night — pier departure is 7:30am tomorrow</span>
+          <span class="chip tip">Free breakfast at HIX starts 6:30am — grab before leaving for pier</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Guilin+North+Station" target="_blank" class="ext-link map">📍 Guilin North Station</a>
+        </div>
+      </div>
+
+      <div class="tl-item food">
+        <div class="tl-time">9:00 PM — Dinner</div>
+        <div class="tl-title">桂林米粉 Guilin Rice Noodles · First Bowl</div>
+        <div class="tl-desc">Walk out of the hotel — noodle shops are directly on or one street off Zhengyang Street, right next to HIX. Your first authentic Guilin rice noodles — order dry-style (干拌), not the soup version. Toppings of braised pork, peanuts, and pickled vegetables. Any busy local noodle shop near the hotel works. Quick dinner, early bed.</div>
+        <div class="chips">
+          <span class="chip price">CNY 8–15/bowl</span>
+          <span class="chip tip">Order dry-style (干拌) — more flavour than the soup version</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Guilin+rice+noodles+near+hotel" target="_blank" class="ext-link map">📍 Near your hotel</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">10:00 PM — Zhengyang Street</div>
+        <div class="tl-title">正阳路 · Guilin's Night Strip · Osmanthus Cake</div>
+        <div class="tl-desc">Same street as dinner — just keep walking. A short stroll down Zhengyang Street — Guilin's main pedestrian night strip. Try osmanthus cake (桂花糕) for CNY 5–8. Keep it to 20–30 min.</div>
+        <div class="chips">
+          <span class="chip price">Osmanthus cake CNY 5–8</span>
+        </div>
+      </div>
+
+      <div class="tl-item relax">
+        <div class="tl-time">10:30 PM — Back to Hotel</div>
+        <div class="tl-title">Early Night · Li River Pier at 7:30am Tomorrow</div>
+        <div class="tl-desc">Walk back to HIX — it's right on Zhengyang Street, less than 5 min on foot. In bed by 11pm. The Li River cruise pier requires a 7:30am hotel departure — that means up by 6:30am for the free HIX breakfast first.</div>
+        <div class="chips">
+          <span class="chip warn">Up by 6:30am · Pier departure 7:30am · No late nights</span>
+        </div>
+      </div>
+
+    </div><!-- end timeline -->
+  </div><!-- section -->
+</div><!-- page -->
+
+
+<!-- ===== DAY 4 ===== -->
+<div id="day4" class="page">
+  <div class="section">
+    <div class="day-header">
+      <div class="day-num">4</div>
+      <div class="day-info">
+        <div class="day-date">Friday 17 July 2026</div>
+        <div class="day-title">Li River Cruise + Arrive Yangshuo</div>
+      </div>
+      <div class="day-city-tag">Guilin → Yangshuo</div>
+    </div>
+    <div class="spend-strip">
+      <span class="spend-item">⏰ <strong>Hotel departure:</strong> 7:30 AM · Grab free breakfast first (6:30am)</span>
+      <span class="spend-item">⭐⭐ <strong>Li River Cruise:</strong> 9:35 AM → 1:30 PM · Pre-book weeks ahead</span>
+      <span class="spend-item">🏨 <strong>Check in:</strong> Yuyuan Resort Yangshuo ~3pm (N4–N5 · 2 nights)</span>
+      <span class="spend-item total">~CNY 600/pax</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item rest">
+        <div class="tl-time">6:00 AM — Rise &amp; Shine</div>
+        <div class="tl-title">⏰ Early Wake Up · Wash Up · Pack Daypack for the Cruise</div>
+        <div class="tl-desc">Early morning for the Li River cruise — breakfast at 6:30am, taxis to the pier by 7:30am. Wake up and wash up quickly. Pack a light daypack: sunscreen, hat, light jacket (boat deck can be breezy), portable charger, cash (CNY 100–200). Full luggage stays in the hotel room — checkout is tomorrow.</div>
+        <div class="chips">
+          <span class="chip warn">⏰ Taxis to pier at 7:30 AM — don't be slow</span>
+          <span class="chip tip">Daypack: sunscreen · hat · jacket · cash · charger</span>
+        </div>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">6:30 AM — Breakfast at Hotel</div>
+        <div class="tl-title">Free Breakfast at HIX · Then Leave by 7:30am</div>
+        <div class="tl-desc">At the hotel — dining room is in the lobby. The hotel breakfast starts at 6:30am — grab something quick and substantial. You'll be on the boat for 4 hours with lunch included, so just enough for the morning. Leave the hotel by 7:30am sharp.</div>
+        <div class="chips">
+          <span class="chip warn">Leave hotel by 7:30am sharp</span>
+        </div>
+      </div>
+
+      <div class="tl-item move">
+        <div class="tl-time">7:30 AM — To the Pier</div>
+        <div class="tl-title">Taxi to Zhujiang Pier 竹江码头 · ~40 Min</div>
+        <div class="tl-desc">The pier is about 20km outside Guilin city — take 2 taxis for the group, about 40 min, CNY 100 per car. Bring all luggage — you sail to Yangshuo and check in there, so you don't return to Guilin. Arrive at the pier by 8:30–8:40am for ticket collection and boarding.</div>
+        <div class="chips">
+          <span class="chip warn">Arrive pier by 8:40am — cruise departs 9:35am, no exceptions</span>
+          <span class="chip price">~CNY 100/taxi · 2 taxis for 6 pax + luggage</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Zhujiang+Pier+Guilin+Li+River+cruise" target="_blank" class="ext-link map">📍 Zhujiang Pier</a>
+        </div>
+      </div>
+
+      <div class="tl-item act">
+        <div class="tl-time">9:35 AM → 1:30 PM — ⭐⭐ LI RIVER CRUISE</div>
+        <div class="tl-title">漓江 4-Star Cruise · 83km · The Scenery on China's 20 RMB Note</div>
+        <div class="tl-desc">Already at Zhujiang Pier from the taxi — board the boat here. The highlight of the entire trip. You sail 83km from Guilin to Yangshuo through the most famous karst landscape on earth — the exact scenery printed on the Chinese 20 RMB banknote. In July, higher water levels mean the river is fuller and morning mist sits on the peaks. The 4-star boat has an indoor AC cabin — use it to cool down between deck sessions. Key moments to be on the top deck: Nine Horse Fresco Hill (~11am), Xingping Ancient Town (~12pm), and Yellow Cloth Shoal (~12:30pm) where the 20 RMB reflection shot is. Buffet lunch is included.</div>
+        <div class="chips">
+          <span class="chip price">~CNY 430–480/pax · Buffet lunch included</span>
+          <span class="chip warn">Pre-book 2–3 weeks ahead — July peak fills fast</span>
+          <span class="chip tip">Be on top deck ~12:30pm for the 20 RMB banknote view</span>
+        </div>
+        <div class="link-row">
+          <a href="https://www.klook.com/en-SG/activity/19197-li-river-four-star-cruise-guilin/" target="_blank" class="ext-link book">🎟️ Book on Klook</a>
+          <a href="https://www.youtube.com/results?search_query=Li+River+cruise+Guilin+Yangshuo" target="_blank" class="ext-link info">🎬 Vlog</a>
+        </div>
+      </div>
+
+      <div class="tl-item move">
+        <div class="tl-time">1:30 PM — Arrive Yangshuo</div>
+        <div class="tl-title">Dock at Shuidongmen Pier · DiDi to Yuyuan Resort</div>
+        <div class="tl-desc">The cruise ends at Shuidongmen Pier in Yangshuo town. Take DiDi to Yuyuan Resort (~CNY 25, 15 min). Book the DiDi while you're still on the boat approaching the dock — it's faster than queuing at the pier. Show driver: <strong>阳朔渔源度假村</strong>.</div>
+        <div class="chips">
+          <span class="chip tip">Book DiDi on the boat before docking — pier is busy at arrival time</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Yuyuan+Resort+Yangshuo" target="_blank" class="ext-link map">📍 Yuyuan Resort</a>
+        </div>
+      </div>
+
+      <div class="tl-item relax">
+        <div class="tl-time">3:00 PM — Afternoon Free</div>
+        <div class="tl-title">Pool · Town Walk · Or Just Rest</div>
+        <div class="tl-desc">Already at Yuyuan Resort — drop bags and choose. You've been up since 6:30am and on a boat for 4 hours. The Yuyuan pool faces the karst peaks directly — it's one of the best hotel pools in China. Or walk into Yangshuo town (taxi 15 min) and browse the local streets behind West Street. Don't bother with West Street itself — it's all tourist restaurants at tourist prices.</div>
+        <div class="chips">
+          <span class="chip tip">The pool facing karst peaks at 3–5pm has incredible afternoon light</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">5:30 PM — Waterfront Walk</div>
+        <div class="tl-title">Li River Promenade · Sugarcane Juice · Golden Hour Peaks</div>
+        <div class="tl-desc">Walk along the Li River waterfront as the light turns golden. Buy freshly pressed sugarcane juice (甘蔗汁, CNY 8–10) from a street stall. The karst peaks at 5:30–6pm in warm evening light look completely different from midday — some of the best photos of the trip happen here.</div>
+        <div class="chips">
+          <span class="chip free">Free walk · Sugarcane juice CNY 8–10</span>
+        </div>
+      </div>
+
+      <div class="tl-item food">
+        <div class="tl-time">7:00 PM — Beer Fish Dinner</div>
+        <div class="tl-title">啤酒鱼 Beer Fish · Hospital Road ONLY · Not West Street</div>
+        <div class="tl-desc">DiDi from the waterfront or Yuyuan to Hospital Road — CNY 15–25, about 10 min. Yangshuo's signature dish — fresh river fish braised with local beer, chillies, and tomatoes. Go to Hospital Road (医院路) or the streets behind it, not West Street. Same dish, 3x cheaper, all locals. Ask your hotel to recommend a specific restaurant. When ordering, always ask "多少钱一斤?" (how much per jin?) before the fish goes in the wok. One fish (600g–1kg) feeds 2–3 people.</div>
+        <div class="chips">
+          <span class="chip warn">Hospital Road (医院路) only · Ask price per jin before ordering</span>
+          <span class="chip price">~CNY 30/pax total with sides</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/beer+fish+Yangshuo+Hospital+Road" target="_blank" class="ext-link map">📍 Hospital Road</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">9:00 PM — West Street Stroll</div>
+        <div class="tl-title">西街 For the Atmosphere · Lanterns + Cold Beer · Don't Eat Here</div>
+        <div class="tl-desc">Walk through West Street for the vibe — lanterns, music, crowds, old buildings. Get a cold osmanthus beer or a glass of osmanthus wine (桂花酒) from a street stall. This is atmosphere only — you've already eaten at Hospital Road. 30–40 min and back to hotel.</div>
+        <div class="chips">
+          <span class="chip price">Drinks + snacks ~CNY 15–25/pax</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/West+Street+Yangshuo" target="_blank" class="ext-link map">📍 West Street</a>
+        </div>
+      </div>
+
+      <div class="tl-item move">
+        <div class="tl-time">10:30 PM — Back to Yuyuan</div>
+        <div class="tl-title">DiDi Back to Hotel · ~15 Min</div>
+        <div class="tl-desc">DiDi from West Street back to Yuyuan Resort — CNY 25–35, about 15 min.</div>
+        <div class="chips">
+          <span class="chip info">DiDi CNY 25–35 · ~15 min</span>
+        </div>
+      </div>
+
+      <div class="tl-item relax">
+        <div class="tl-time">11:00 PM — Pack for Tomorrow</div>
+        <div class="tl-title">Bags Packed Tonight · Checkout 11am</div>
+        <div class="tl-desc">Already at the hotel. Pack everything tonight so the morning is relaxed. Checkout is 11am — last breakfast with karst views, then train to Shenzhen around 1pm.</div>
+        <div class="chips">
+          <span class="chip tip">Checkout 11am · Train to Shenzhen ~1pm</span>
+        </div>
+      </div>
+
+    </div><!-- end timeline -->
+  </div><!-- section -->
+</div><!-- page -->
+
+
+<div id="day5" class="page">
+  <div class="section">
+    <div class="day-header">
+      <div class="day-num">5</div>
+      <div class="day-info">
+        <div class="day-date">Saturday 18 July 2026</div>
+        <div class="day-title">Yangshuo Full Day</div>
+      </div>
+      <div class="day-city-tag">Yangshuo · Yulong River</div>
+    </div>
+    <div class="spend-strip">
+      <span class="spend-item">🛶 <strong>Yulong Bamboo Raft</strong> 10:30am — the most peaceful 2 hours of the trip</span>
+      <span class="spend-item">💆 <strong>3pm:</strong> Massage (parents) · Scooters countryside (couples)</span>
+      <span class="spend-item">🌅 <strong>6pm:</strong> Hotel pool + karst sunset</span>
+      <span class="spend-item">🏨 <strong>Hotel:</strong> Yuyuan Resort (N5) · Last night · Checkout tomorrow 11am</span>
+      <span class="spend-item total">~CNY 280/pax</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item rest">
+        <div class="tl-time">10:00 AM — Rise &amp; Shine</div>
+        <div class="tl-title">☀️ Wake Up · Wash Up · Relaxed Morning</div>
+        <div class="tl-desc">No rush — first activity is at 10:50am. Wake up, shower, and have a slow start. No checkout today — bags stay in the room. If you packed most things last night, even better. Head down to the terrace for breakfast together.</div>
+        <div class="chips">
+          <span class="chip tip">No checkout today · Bags can wait · Easy morning</span>
+        </div>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">10:30 AM — Breakfast</div>
+        <div class="tl-title">Hotel Breakfast with Karst Views · No Rush This Morning</div>
+        <div class="tl-desc">At Yuyuan Resort — breakfast is served on the terrace. The only unhurried morning of the trip. Sit on the Yuyuan terrace with the karst peaks in front of you — morning mist still sits on the mountains between 8–10am. After breakfast, change into quick-dry clothes and pack a dry bag for the raft (phones, wallet, keys).</div>
+        <div class="chips">
+          <span class="chip tip">8–10am mist on karst peaks — best photography window of the whole trip</span>
+        </div>
+      </div>
+
+      <div class="tl-item move">
+        <div class="tl-time">10:50 AM — DiDi to Shuiedi Dock</div>
+        <div class="tl-title">🚕 To Yulong River · Shuiedi Dock 水埠头码头 · ~15 Min</div>
+        <div class="tl-desc">DiDi to Shuiedi Dock, about 15 min, CNY 20–25. This is the main departure point for Yulong River bamboo rafts. Arrive 10–15 min early to confirm bookings.</div>
+        <div class="chips">
+          <span class="chip info">DiDi CNY 20–25 · ~15 min from Yuyuan</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Shuiedi+Dock+Yulong+River+Yangshuo" target="_blank" class="ext-link map">📍 Shuiedi Dock</a>
+        </div>
+      </div>
+
+      <div class="tl-item act">
+        <div class="tl-time">11:00 AM → 1:00 PM — ⭐ YULONG BAMBOO RAFT</div>
+        <div class="tl-title">遇龙河 Yulong River · 2 Hours · Silence + Karst Peaks</div>
+        <div class="tl-desc">Flat bamboo rafts poled slowly along the Yulong River — a quieter tributary of the Li with no motor boats. Same karst peaks as yesterday's cruise but at ground level, completely silent. The bamboo groves along the bank create natural shade over the water, and the river is cool. Bring a dry bag — the raft can get splashed at shallow rapids. The raft ends at Gongnong Bridge (公农桥) where village lunch spots are right at the landing.</div>
+        <div class="chips">
+          <span class="chip price">~CNY 150–180/pax · Book via Klook or hotel concierge</span>
+          <span class="chip tip">Bring dry bag · Sandals or water shoes recommended</span>
+        </div>
+        <div class="link-row">
+          <a href="https://www.klook.com/en-SG/activity/2705-yulong-river-bamboo-raft-yangshuo/" target="_blank" class="ext-link book">🎟️ Book on Klook</a>
+          <a href="https://www.youtube.com/results?search_query=Yulong+River+bamboo+raft+Yangshuo" target="_blank" class="ext-link info">🎬 Vlog</a>
+        </div>
+      </div>
+
+      <div class="tl-item food">
+        <div class="tl-time">1:30 PM — Village Lunch</div>
+        <div class="tl-title">Local Lunch at Gongnong Bridge · Bamboo Rice + River Views</div>
+        <div class="tl-desc">The raft drops you off at Gongnong Bridge — restaurants are literally at the landing point, no walking needed. Simple village restaurants right at the raft landing. Sit outside with karst peaks in view. Order bamboo rice (竹筒饭) — sticky rice steamed inside bamboo, a local specialty. Cash preferred at small village spots.</div>
+        <div class="chips">
+          <span class="chip price">CNY 30–45/pax · Cash preferred</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Gongnong+Bridge+Yangshuo+restaurant" target="_blank" class="ext-link map">📍 Gongnong Bridge</a>
+        </div>
+      </div>
+
+      <div class="tl-item relax">
+        <div class="tl-time">3:30 PM — Group Splits</div>
+        <div class="tl-title">💆 Massage (Parents) · 🛵 Scooters (Couples) · Back by 6pm</div>
+        <div class="tl-desc">Parents: foot and shoulder massage at a shop near the hotel, about CNY 80–120 for 90 min in a cool AC room — perfect for the hottest part of the day. Couples: rent electric scooters (CNY 80–100/bike) and ride the Ten-Mile Gallery (十里画廊) — a flat 10km road through rice paddies and karst peaks, mostly shaded by bamboo. Both groups back at Yuyuan by 6pm for the pool sunset.</div>
+        <div class="chips">
+          <span class="chip price">Massage CNY 80–120 · Scooters CNY 80–100/bike</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Ten+Mile+Gallery+Yangshuo" target="_blank" class="ext-link map">📍 Ten-Mile Gallery</a>
+        </div>
+      </div>
+
+      <div class="tl-item relax">
+        <div class="tl-time">6:00 PM — Hotel Pool + Sunset</div>
+        <div class="tl-title">🏊 Yuyuan Pool · Karst Peaks 200m Away · Golden Hour</div>
+        <div class="tl-desc">Already at Yuyuan — pool is on the resort grounds. Yuyuan's pool faces directly toward the karst peaks and Yulong River. At 6pm the light turns golden and the peaks catch the last sun — one of the most scenic hotel pools in China. Swim, sit on the lawn, grab drinks from the hotel bar. This is the only evening you have here.</div>
+        <div class="chips">
+          <span class="chip tip">6:30–7pm golden hour is the best light of the trip for the pool shot</span>
+        </div>
+      </div>
+
+      <div class="tl-item food">
+        <div class="tl-time">7:30 PM — Xianqian Street</div>
+        <div class="tl-title">🌃 县前街 Local Night Market · NOT West Street</div>
+        <div class="tl-desc">DiDi from Yuyuan to Xianqian Street (县前街) — about 15 min, CNY 25–35. This runs parallel to West Street but is where locals actually eat. Open-air stalls, real prices. Order river snails (田螺), rice noodles dry-tossed (干拌米粉), and sticky rice cake (糍粑). Osmanthus wine (桂花酒) pairs perfectly with anything here.</div>
+        <div class="chips">
+          <span class="chip warn">Xianqian Street (县前街) — NOT West Street (西街)</span>
+          <span class="chip price">~CNY 40–60/pax</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Xianqian+Street+Yangshuo" target="_blank" class="ext-link map">📍 Xianqian Street</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">9:30 PM — West Street</div>
+        <div class="tl-title">西街 · Lanterns + Atmosphere · 20 Min Walk</div>
+        <div class="tl-desc">5-min walk from Xianqian Street — they run parallel. A short walk through West Street just for the atmosphere — lanterns, music, crowds, old buildings lit up at night. You're not eating here. 20 min, then DiDi back.</div>
+        <div class="chips">
+          <span class="chip free">Just walking · No food · Atmosphere only</span>
+        </div>
+      </div>
+
+      <div class="tl-item move">
+        <div class="tl-time">10:00 PM — DiDi Back to Yuyuan</div>
+        <div class="tl-title">Last Ride Back · ~15 Min</div>
+        <div class="tl-desc">DiDi from West Street back to Yuyuan Resort — CNY 25–35, about 15 min.</div>
+        <div class="chips">
+          <span class="chip info">DiDi CNY 25–35 · ~15 min</span>
+        </div>
+      </div>
+
+      <div class="tl-item relax">
+        <div class="tl-time">10:30 PM — Pack for Tomorrow</div>
+        <div class="tl-title">Bags Packed Tonight · Checkout 11am · Shenzhen</div>
+        <div class="tl-desc">Already at the hotel. Pack everything tonight. Checkout is 11am — morning is free for one last breakfast with karst views before the train to Shenzhen around 1pm.</div>
+        <div class="chips">
+          <span class="chip tip">Checkout 11am · Shenzhen train ~1pm tomorrow</span>
+        </div>
+      </div>
+
+      <div class="tl-item" style="border-left-color:#f59e0b;">
+        <div class="tl-time">🌟 Optional Extras</div>
+        <div class="tl-title">Hot Air Balloon · Impression Liu Sanjie · Xingping Town</div>
+        <div class="tl-desc"><strong>🎈 Hot air balloon at sunrise (book tonight):</strong> 60-min free flight over karst peaks at 5:30am, CNY 500–600/pax. Back by 7am. Worth the early alarm — nothing compares to this view. Book via hotel or Klook.<br><br><strong>🎭 Impression Liu Sanjie (7:30–8:40pm):</strong> Zhang Yimou's outdoor river show using the karst peaks as the stage backdrop — hundreds of performers, lanterns on the water, genuinely spectacular. CNY 238–388. Book ahead on Klook. Replaces the night market if the group wants it.<br><br><strong>🏘️ Xingping Ancient Town:</strong> The 20 RMB note village. DiDi ~CNY 50, 25 min. Add to the morning before the raft.</div>
+        <div class="chips">
+          <span class="chip tip">🎈 Book balloon tonight — 5am pickup, back by 7am</span>
+        </div>
+        <div class="link-row">
+          <a href="https://www.klook.com/en-SG/activity/160667-guilin-yangshuo-hot-balloon-freely-flying/" target="_blank" class="ext-link book">🎈 Hot Air Balloon</a>
+          <a href="https://www.klook.com/en-SG/search/?query=Impression+Liu+Sanjie+Yangshuo" target="_blank" class="ext-link book">🎭 Liu Sanjie Show</a>
+        </div>
+      </div>
+
+    </div><!-- end timeline -->
+  </div><!-- section -->
+</div><!-- page -->
+
+
+<div id="day5b" class="page">
+  <div class="section">
+    <div class="day-header">
+      <div class="day-num">6</div>
+      <div class="day-info">
+        <div class="day-date">Sunday 19 July 2026</div>
+        <div class="day-title">Yangshuo → Shenzhen</div>
+      </div>
+      <div class="day-city-tag">Transit Day</div>
+    </div>
+    <div class="spend-strip">
+      <span class="spend-item">🕙 <strong>Checkout:</strong> Yuyuan Resort 11am</span>
+      <span class="spend-item">🚄 <strong>Train ~1pm:</strong> Yangshuo → Shenzhen North (~2.5 hrs)</span>
+      <span class="spend-item">🏙 <strong>Arrive SZX ~4pm</strong> · Check in Grade Hotel Shekou</span>
+      <span class="spend-item total">~CNY 360/pax</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item rest">
+        <div class="tl-time">10:00 AM — Rise &amp; Shine · Pack Up</div>
+        <div class="tl-title">⏰ Wake Up · Shower · Final Check · Checkout at 11am</div>
+        <div class="tl-desc">Checkout is at 11am — be fully packed before heading down to breakfast. Wake up, shower, then do a final room sweep: chargers, toiletries, anything left drying overnight. Zip everything up and stack bags by the door. You packed most of it last night — this is just the final sweep and toothbrush grab. Bags drop at reception after breakfast, then it's farewell Yangshuo.</div>
+        <div class="chips">
+          <span class="chip warn">⚠️ Checkout 11:00 AM — bags packed before breakfast</span>
+          <span class="chip tip">Final sweep: chargers · bathroom · balcony · drying rack</span>
+        </div>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">10:30 AM — Last Yangshuo Breakfast</div>
+        <div class="tl-title">Final Breakfast with Karst Views</div>
+        <div class="tl-desc">At Yuyuan Resort — same terrace as before. One last meal in front of the mountains. Sit on the Yuyuan terrace, look at the rice paddies and karst peaks, and eat slowly. You leave in an hour.</div>
+        <div class="chips">
+          <span class="chip tip">Last karst mountain view — eat slowly</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">11:00 AM — Check Out</div>
+        <div class="tl-title">Final 45 Min in Yangshuo · Last Photos</div>
+        <div class="tl-desc">Check out by 11am. Walk to the riverside for last photos. Pick up osmanthus cake from a local shop (not West Street) before you go — same item, half the price for the souvenir.</div>
+        <div class="chips">
+          <span class="chip tip">Osmanthus cake from local shop · Cheaper than West Street</span>
+        </div>
+      </div>
+
+      <div class="tl-item move">
+        <div class="tl-time">12:30 PM — To the Station</div>
+        <div class="tl-title">DiDi to Yangshuo Train Station</div>
+        <div class="tl-desc">DiDi to Yangshuo station (~15 min, CNY 25). Allow 30 min for security and ticket collection. Target a 1:00–1:30pm train to Shenzhen North.</div>
+        <div class="chips">
+          <span class="chip price">Train CNY 200–280/pax · Book on Trip.com</span>
+        </div>
+        <div class="link-row">
+          <a href="https://www.trip.com/trains/" target="_blank" class="ext-link info">🚄 Book on Trip.com</a>
+          <a href="https://maps.google.com/maps/search/Yangshuo+Railway+Station" target="_blank" class="ext-link map">📍 Yangshuo Station</a>
+        </div>
+      </div>
+
+      <div class="tl-item move">
+        <div class="tl-time">~4:00 PM — Arrive Shenzhen</div>
+        <div class="tl-title">Shenzhen North Station · DiDi to Grade Hotel Shekou</div>
+        <div class="tl-desc">DiDi from Shenzhen North to Grade Hotel Shekou (~40 min, CNY 60–80). Check in, drop bags, freshen up. Tonight is a light recovery evening — nothing intense, just a short walk and dinner near the hotel.</div>
+        <div class="chips">
+          <span class="chip info">Hotel: Grade Hotel Shenzhen Shekou Sea World · Shuiwan Metro below</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Grade+Hotel+Shenzhen+Shekou+Sea+World" target="_blank" class="ext-link map">📍 Grade Hotel Shekou</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">6:00 PM — Sea World Plaza Stroll</div>
+        <div class="tl-title">🚢 Sea World Plaza · 5 Min Walk from Hotel · Easy Evening</div>
+        <div class="tl-desc">Sea World Plaza is a 20-min walk from the Grade Hotel — or a quick DiDi if parents prefer — a waterfront square built around a full-size cruise ship that never moves. Cafés, restaurants, a nice evening breeze. Just a gentle walk after the train. No entrance fee.</div>
+        <div class="chips">
+          <span class="chip free">Free · 5 min walk from hotel</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Sea+World+Plaza+Shenzhen+Shekou" target="_blank" class="ext-link map">📍 Sea World Plaza</a>
+        </div>
+      </div>
+
+      <div class="tl-item food">
+        <div class="tl-time">8:00 PM — Dinner Near Hotel</div>
+        <div class="tl-title">Casual Dinner · Sea World Area · Early Night</div>
+        <div class="tl-desc">Eat near the Sea World plaza — plenty of Cantonese restaurants and casual spots within walking distance of the hotel. Keep it simple tonight. Tomorrow is the big day: Dafen, spa, water show, and final seafood dinner.</div>
+        <div class="chips">
+          <span class="chip price">~CNY 80–100/pax</span>
+        </div>
+      </div>
+
+    </div><!-- end timeline -->
+  </div><!-- section -->
+</div><!-- page -->
+
+
+<div id="day6" class="page">
+  <div class="section">
+    <div class="day-header">
+      <div class="day-num">7</div>
+      <div class="day-info">
+        <div class="day-date">Monday 20 July 2026 · Fly Home Tue 21 Jul at 02:20</div>
+        <div class="day-title">Shenzhen Full Day · SQ857 Home</div>
+      </div>
+    </div>
+    <div class="spend-strip">
+      <span class="spend-item">🎨 <strong>11am:</strong> Dafen Oil Painting Village</span>
+      <span class="spend-item">💆 <strong>2:30–6:30pm:</strong> Heat Joy Spa</span>
+      <span class="spend-item">🌊 <strong>8pm:</strong> OCT Harbour Water Show</span>
+      <span class="spend-item">🦀 <strong>8:30pm:</strong> Final seafood dinner splurge</span>
+      <span class="spend-item">✈️ <strong>SQ857:</strong> SZX T3 02:20 → SIN 06:30</span>
+      <span class="spend-item total">~CNY 500–600/pax</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item rest">
+        <div class="tl-time">9:30 AM — Rise &amp; Shine</div>
+        <div class="tl-title">⏰ Wake Up · Wash Up · Checkout at 10:30am</div>
+        <div class="tl-desc">Last full day — checkout at 10:30am, bags stored at the bell desk for the day. Wake up, shower, and do a final pack sweep. Big luggage goes to the bell desk after breakfast — carry only a daypack for Dafen and the spa. Make sure your phone is fully charged: it's a long day before the 2am flight. Collect luggage from bell desk at 10:30pm tonight.</div>
+        <div class="chips">
+          <span class="chip warn">⚠️ Checkout 10:30 AM · Big bags to bell desk</span>
+          <span class="chip tip">Daypack only for the day · Collect luggage 10:30 PM</span>
+          <span class="chip tip">Charge all devices fully this morning</span>
+        </div>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">10:00 AM — Final Cantonese Breakfast</div>
+        <div class="tl-title">Last Dim Sum in China</div>
+        <div class="tl-desc">Hotel restaurant or walk 5 min to a dim sum shop in the Sea World / Shekou area. Hotel breakfast or a nearby dim sum spot. Har gow, siu mai, egg tarts, cheung fun. Eat slowly — flight isn't until 2am and there's no rush this morning.</div>
+        <div class="chips">
+          <span class="chip tip">Last dim sum in China · No rush · Flight is 2am</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">10:30 AM — Check Out</div>
+        <div class="tl-title">🏨 Store All Luggage at Grade Hotel Bell Desk · Daypack Only</div>
+        <div class="tl-desc">Already at the Grade Hotel — drop bags at the bell desk before leaving. Check out and store all bags with the bell desk — free, standard service, they give you a claim tag. Collect tonight at 10:30pm before heading to the airport. Go out with just a daypack.</div>
+        <div class="chips">
+          <span class="chip warn">All luggage at bell desk · Collect 10:30pm · Daypack only today</span>
+        </div>
+      </div>
+
+      <div class="tl-item act">
+        <div class="tl-time">11:00 AM — Dafen Village</div>
+        <div class="tl-title">🎨 大芬油画村 · Hundreds of Working Artist Studios</div>
+        <div class="tl-desc">Dafen is one of the most unique places in the world — an entire village of working artist studios where you can buy oil paintings directly from the painters. Museum-quality Van Gogh reproductions, original landscapes, custom portraits (CNY 200–400, ready in a few hours). Wander the painted lanes, step into studios, watch painters at work. DiDi from Shekou ~CNY 55–70, about 40 min. Allow 1.5 hrs.</div>
+        <div class="chips">
+          <span class="chip info">Paintings CNY 50–500 · Commission a custom portrait CNY 200–400</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Dafen+Oil+Painting+Village+Shenzhen" target="_blank" class="ext-link map">📍 Dafen Village</a>
+          <a href="https://www.timeout.com/shenzhen/attractions/dafen-oil-painting-village" target="_blank" class="ext-link info">📖 What to expect</a>
+        </div>
+      </div>
+
+      <div class="tl-item food">
+        <div class="tl-time">1:00 PM — Lunch</div>
+        <div class="tl-title">Light Cantonese Lunch · Near Dafen or on the Way</div>
+        <div class="tl-desc">Eat at a local shop near Dafen Village, then DiDi toward Futian (Chegongmiao) where Heat Joy Spa is — CNY 30–45, about 20–25 min. Congee, wonton noodles, or char siu rice from a local shop. Keep it light before the spa. Arrive at Heat Joy Spa by 2:15pm.</div>
+        <div class="chips">
+          <span class="chip price">~CNY 30–40/pax</span>
+        </div>
+      </div>
+
+      <div class="tl-item relax">
+        <div class="tl-time">2:30 PM → 6:30 PM — Group Spa</div>
+        <div class="tl-title">💆 Heat Joy Spa 热带雨林 · 4 Hours · Everyone Recharges</div>
+        <div class="tl-desc">DiDi from lunch area to Heat Joy Spa in Futian (Chegongmiao) — ~CNY 20–30 depending on where you ate. The best way to spend the final afternoon. The wristband (CNY 200–250/pax) gives you access to hot spring pools, saunas, steam rooms, and heated rest beds for the whole 4 hours. Add a full-body massage for CNY 80–120 extra at the front desk. After 7 days of trains, boats, and walking, everyone needs this — especially the parents.</div>
+        <div class="chips">
+          <span class="chip price">CNY 200–250 wristband · Massage add-on CNY 80–120</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Heat+Joy+Spa+Shenzhen" target="_blank" class="ext-link map">📍 Heat Joy Spa</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">6:30 PM — OCT Harbour</div>
+        <div class="tl-title">🌊 欢乐海岸 Canal Walk · DJI Store · Light Show</div>
+        <div class="tl-desc">Walk the OCT Harbour canal — a European-style waterfront strip with cafés and boutiques. The DJI flagship store is right here for anyone interested. ⚠️ The ticketed Water Show Theatre is closed on Mondays — Day 7 falls on a Monday. However, the free <strong>Sparkle Flow</strong> light installations run Mon–Fri 6–10pm along the canal — jellyfish light waterfalls, laser installations, and the canal strip lit up at night. Still a great atmosphere. The DJI flagship store is right here too.</div>
+        <div class="chips">
+          <span class="chip warn">⚠️ Water Show closed Mondays · Free Sparkle Flow light walk instead</span>
+          <span class="chip tip">Sparkle Flow runs Mon–Fri 6–10pm · Free · No booking needed</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/OCT+Harbour+Shenzhen" target="_blank" class="ext-link map">📍 OCT Harbour</a>
+          <a href="https://maps.google.com/maps/search/DJI+flagship+store+Shenzhen" target="_blank" class="ext-link map">📍 DJI Store</a>
+        </div>
+      </div>
+
+      <div class="tl-item food">
+        <div class="tl-time">8:30 PM — Final Dinner · Splurge</div>
+        <div class="tl-title">🦀 Live Cantonese Seafood · Last Big Meal in China</div>
+        <div class="tl-desc">Short walk or 5-min DiDi from OCT Harbour to a live-tank seafood restaurant in the Shekou/Nanshan area. Go all out on the last dinner — a live-tank Cantonese seafood restaurant in the Shekou/Nanshan area. Order butter crab (牛油蟹), steamed garoupa, wok-fried clams, and whatever looks good in the tank. Ask the hotel to recommend a specific restaurant with live tanks. This is the meal you'll talk about on the plane home.</div>
+        <div class="chips">
+          <span class="chip price">~CNY 65–100/pax · Splurge — it's the last night</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/live+seafood+Cantonese+restaurant+Shekou+Shenzhen" target="_blank" class="ext-link map">📍 Find near Shekou</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">10:30 PM — Collect Luggage · Head to Airport</div>
+        <div class="tl-title">Pick Up Bags at Grade Hotel · 2 DiDi MPVs to SZX T3</div>
+        <div class="tl-desc">Collect all bags from the Grade Hotel bell desk, then take 2 DiDi MPVs to Shenzhen Airport T3 (~CNY 80–100/car). SQ857 check-in opens at 00:20. Aim to be at the terminal by midnight.</div>
+        <div class="chips">
+          <span class="chip warn">Book 2 DiDi MPVs at 11pm — enough space for 6 pax + all luggage</span>
+        </div>
+      </div>
+
+      <div class="tl-item move">
+        <div class="tl-time">02:20 AM — SQ857 Departs</div>
+        <div class="tl-title">✈️ SZX T3 → Singapore T2 · Arrive 06:30 Tue 21 Jul</div>
+        <div class="tl-desc">Flight home. Sleep on the plane — you arrive in Singapore at 6:30am Monday. Same timezone, no jet lag. Back to real life, but with seven days of memories worth talking about for years.</div>
+        <div class="chips">
+          <span class="chip info">SZX T3 02:20 → SIN T2 06:30 · ~4h 10min</span>
+        </div>
+      </div>
+
+      <div class="tl-item" style="border-left-color:#f59e0b;">
+        <div class="tl-time">🌟 If Time Allows</div>
+        <div class="tl-title">Shenzhen Bay Park · Lianhuashan Park · DX-PARK 2.0</div>
+        <div class="tl-desc">Shenzhen Bay Park is a flat coastal walk with views of the Hong Kong skyline across the water — best in the morning before Dafen. Lianhuashan Park has a hilltop panorama of the whole city — free, 20 min from Shekou. DX-PARK 2.0 is a high-tech indoor sports and games venue near Shekou if the group wants something different after the spa.</div>
+        <div class="chips">
+          <span class="chip free">Shenzhen Bay Park — free coastal walk</span>
+          <span class="chip info">DX-PARK 2.0 — indoor sports + games</span>
+        </div>
+        <div class="link-row">
+          <a href="https://maps.google.com/maps/search/Shenzhen+Bay+Park" target="_blank" class="ext-link map">📍 Shenzhen Bay Park</a>
+          <a href="https://www.klook.com/en-SG/activity/103756-hop-dx-sports-shen-zhen/" target="_blank" class="ext-link info">🎮 DX-PARK 2.0</a>
+        </div>
+      </div>
+
+    </div><!-- end timeline -->
+  </div><!-- section -->
+</div><!-- page -->
+
+
+<div id="food" class="page">
+  <div class="food-dark">
+    <div class="food-inner">
+      <div class="sh">Must-Eat by City</div>
+      <div class="food-cols">
+        <div class="food-col">
+          <h4>Guangzhou</h4>
+          <div class="fitem"><div class="fdot"></div>Har gow + siu mai — Tao Tao Ju</div>
+          <div class="fitem"><div class="fdot"></div>Roast goose (烧鹅) — Shangxiajiu</div>
+          <div class="fitem"><div class="fdot"></div>Clay pot rice (煲仔饭) — night stalls</div>
+          <div class="fitem"><div class="fdot"></div>Fried fresh milk (炸鲜奶) — Yongqingfang</div>
+          <div class="fitem"><div class="fdot"></div>XO sauce cheung fun — Dian Dou De</div>
+          <div class="fitem"><div class="fdot"></div>Egg tart — Guangzhou Restaurant</div>
+          <div class="fitem"><div class="fdot"></div>Nai huang bao (egg yolk lava bun)</div>
+          <div class="fitem"><div class="fdot"></div>Mango pomelo sago (杨枝甘露)</div>
+        </div>
+        <div class="food-col">
+          <h4>Foshan (Shunde)</h4>
+          <div class="fitem"><div class="fdot"></div>Double-skin milk (双皮奶) ← MUST</div>
+          <div class="fitem"><div class="fdot"></div>Shunde raw fish salad (顺德鱼生)</div>
+          <div class="fitem"><div class="fdot"></div>Steamed fresh fish with ginger</div>
+          <div class="fitem"><div class="fdot"></div>Shunde congee (粥)</div>
+          <div class="fitem"><div class="fdot"></div>Foshan peanut milk (花生奶)</div>
+        </div>
+        <div class="food-col">
+          <h4>Guilin / Yangshuo</h4>
+          <div class="fitem"><div class="fdot"></div>Guilin rice noodles 干捞 (dry style)</div>
+          <div class="fitem"><div class="fdot"></div>Beer fish (啤酒鱼) ← Hospital Road only</div>
+          <div class="fitem"><div class="fdot"></div>Lipu taro braised pork (荔浦芋扣肉)</div>
+          <div class="fitem"><div class="fdot"></div>River snails (炒田螺)</div>
+          <div class="fitem"><div class="fdot"></div>Bamboo rice (竹筒饭)</div>
+          <div class="fitem"><div class="fdot"></div>Osmanthus cake (桂花糕) — buy to bring home</div>
+          <div class="fitem"><div class="fdot"></div>Osmanthus wine (桂花酒)</div>
+        </div>
+        <div class="food-col">
+          <h4>Shenzhen</h4>
+          <div class="fitem"><div class="fdot"></div>Live Cantonese seafood — splurge dinner</div>
+          <div class="fitem"><div class="fdot"></div>Butter crab (牛油蟹) — SZX specialty</div>
+          <div class="fitem"><div class="fdot"></div>Wok-fried pork & prawn noodles (炒粉面)</div>
+          <div class="fitem"><div class="fdot"></div>BBQ pork noodles (叉烧面)</div>
+          <div class="fitem"><div class="fdot"></div>Cantonese egg waffles (格仔饼)</div>
+          <div class="fitem"><div class="fdot"></div>Last dim sum round</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TIPS ===== -->
+<div id="tips" class="page">
+  <div class="tips-section">
+    <div class="tips-inner">
+      <div class="sh">Essential Tips</div>
+      <div class="tips-grid">
+        <div class="tip"><div class="tip-icon">📱</div><strong>DiDi + WeChat Pay</strong><p>Set up both before landing. Link a foreign Visa/Mastercard to WeChat Pay at Changi Airport. DiDi accepts WeChat Pay. Most stalls, restaurants, and taxis are fully cashless in China now.</p></div>
+        <div class="tip"><div class="tip-icon">🌐</div><strong>VPN + China SIM</strong><p>Google, WhatsApp, Instagram, and Gmail are blocked in China. Buy a China SIM at Changi (Singtel/StarHub). Install a VPN (ExpressVPN) <b>before landing</b> — you cannot download it once inside China.</p></div>
+        <div class="tip"><div class="tip-icon">🗺️</div><strong>Maps</strong><p>Use Baidu Maps or Apple Maps offline. Google Maps works only with VPN. For DiDi, the app is in English and auto-translates addresses for the driver — just type destination in English.</p></div>
+        <div class="tip"><div class="tip-icon">🛂</div><strong>No Visa Needed</strong><p>Singapore passport = 30-day visa-free entry. Bring original passport — required for hotel check-in, train tickets, Canton Tower entry, and Pearl River cruise boarding. No exceptions.</p></div>
+        <div class="tip"><div class="tip-icon">💰</div><strong>CNY Cash</strong><p>Change SGD → CNY at Changi before flying (S$1 ≈ CNY 5.4). Bring ~CNY 500 cash/pax as emergency backup. WeChat Pay covers everything else. Most China ATMs accept foreign cards too.</p></div>
+        <div class="tip"><div class="tip-icon">🌡️</div><strong>July Weather</strong><p>GZ/SZX: 30–35°C, very humid. Guilin/Yangshuo: 28–33°C, afternoon rain possible (makes karst peaks beautifully misty). Pack: light clothes, foldable umbrella, SPF50+, portable USB fan, good walking shoes.</p></div>
+        <div class="tip"><div class="tip-icon">🚄</div><strong>Train Booking</strong><p>Book on Trip.com — English, accepts foreign cards. Open exactly 30 days before travel (July trains sell out in hours). Select 2nd class (二等座). Same passport number at booking and at station entry.</p></div>
+        <div class="tip"><div class="tip-icon">🍺</div><strong>Yangshuo Warning</strong><p>West Street restaurants = tourist trap prices, mediocre food. Beer fish on Hospital Road (医院路) = real price, real taste. Always ask "多少钱一斤?" (price per 500g?) before ordering live fish.</p></div>
+        <div class="tip"><div class="tip-icon">📸</div><strong>Best Photo Moments</strong><p>Li River top deck at Yellow Cloth Shoal · Yulong River bamboo raft · Yuyuan Resort pool at 6pm sunset · Canton Tower 4–7pm · OCT Loft street art Sunday morning · Shamian Island morning · Foshan Temple courtyard performance.</p></div>
+        <div class="tip"><div class="tip-icon">👴</div><strong>For Parents</strong><p>Every activity is flat or seated. Afternoon rests built in on Day 1, 2, and 5. Li River cruise is 4.5 hrs seated. Bamboo raft is gentle and seated. Heat Joy Spa on Day 6 is perfect for them. Hotel massage available every night.</p></div>
+        <div class="tip"><div class="tip-icon">🎟️</div><strong>Pre-Book These Now</strong><p>1. SQ850 (in) + SQ857 (out) flights — book immediately. 2. Li River 4-star cruise — fills weeks ahead in July. 3. Yangshuo hotel — peak season fills fast. 4. Trains — open 30 days before on Trip.com. Everything else, buy on the day.</p></div>
+        
+        <div class="tip"><div class="tip-icon">🇸🇬</div><strong>Singapore — App &amp; Booking Guide</strong><p>
+        <b>Google Maps:</b> All 📍 links in this guide open correctly from Singapore. Search in English — Google Maps knows all these Chinese locations.<br>
+        <b>Klook SG:</b> All 🎟 Klook links use klook.com/en-SG — your preferred currency is SGD, payment via local card/PayNow works.<br>
+        <b>Trip.com:</b> Use for train bookings (accepts Singapore Visa/Mastercard). Set language to English.<br>
+        <b>Booking.com:</b> For hotels — works globally, SGD pricing available.<br>
+        <b>In China:</b> Switch to DiDi for rides, Apple Maps or Baidu Maps for navigation (Google Maps needs VPN in China).</p></div>
+        <div class="tip"><div class="tip-icon">🌶️</div><strong>Useful Phrases</strong><p>"少辣" (shǎo là) = less spicy. "不辣" (bù là) = no spice. "不要味精" (bù yào wèijīng) = no MSG. "多少钱一斤" (duō shao qián yī jīn?) = how much per 500g? Show on phone screen to restaurant staff.</p></div>
+      </div>
+    </div>
+  </div>
+
+
+<footer>
+  <span>Guangzhou · Foshan · Guilin · Yangshuo · Shenzhen</span><br>
+  Jul 14–21, 2026 · 6 Pax · Hour-by-Hour Edition
+</footer>
+
+<script>
+
+
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    if (b.getAttribute('onclick') === "go('" + id + "')") {
+      b.classList.add('active');
+      b.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  });
+  // sync dropdown
+  var sel = document.querySelector('.day-select');
+  if (sel) sel.value = id;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('load', function() {
+});
+</script>
+</div><!-- tips page -->
+</body>
